@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendrier de l'Avent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .day {
+            background-color: #1976d2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .day:hover:not(.locked) {
+            background-color: #d32f2f;
+        }
+        .day.locked {
+            background-color: #9e9e9e;
+            cursor: not-allowed;
+        }
+        .day::before {
+            content: attr(data-day);
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #d32f2f;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendrier de l'Avent</h1>
+    <div id="message"></div>
+    <div class="calendar">
+        <!-- Exemple pour décembre 2025 -->
+        <a href="https://exemple.com/image1.jpg" class="day" data-day="1">Image 1</a>
+        <a href="https://exemple.com/image2.jpg" class="day" data-day="2">Image 2</a>
+        <a href="https://exemple.com/image3.jpg" class="day" data-day="3">Image 3</a>
+        <a href="https://exemple.com/image4.jpg" class="day" data-day="4">Image 4</a>
+        <a href="https://exemple.com/image5.jpg" class="day" data-day="5">Image 5</a>
+        <a href="https://exemple.com/image6.jpg" class="day" data-day="6">Image 6</a>
+        <a href="https://exemple.com/image7.jpg" class="day" data-day="7">Image 7</a>
+        <a href="https://exemple.com/image8.jpg" class="day" data-day="8">Image 8</a>
+        <a href="https://exemple.com/image9.jpg" class="day" data-day="9">Image 9</a>
+        <a href="https://exemple.com/image10.jpg" class="day" data-day="10">Image 10</a>
+        <a href="https://exemple.com/image11.jpg" class="day" data-day="11">Image 11</a>
+        <a href="https://exemple.com/image12.jpg" class="day" data-day="12">Image 12</a>
+        <a href="https://exemple.com/image13.jpg" class="day" data-day="13">Image 13</a>
+        <a href="https://exemple.com/image14.jpg" class="day" data-day="14">Image 14</a>
+        <a href="https://exemple.com/image15.jpg" class="day" data-day="15">Image 15</a>
+        <a href="https://exemple.com/image16.jpg" class="day" data-day="16">Image 16</a>
+        <a href="https://exemple.com/image17.jpg" class="day" data-day="17">Image 17</a>
+        <a href="https://exemple.com/image18.jpg" class="day" data-day="18">Image 18</a>
+        <a href="https://exemple.com/image19.jpg" class="day" data-day="19">Image 19</a>
+        <a href="https://exemple.com/image20.jpg" class="day" data-day="20">Image 20</a>
+        <a href="https://exemple.com/image21.jpg" class="day" data-day="21">Image 21</a>
+        <a href="https://exemple.com/image22.jpg" class="day" data-day="22">Image 22</a>
+        <a href="https://exemple.com/image23.jpg" class="day" data-day="23">Image 23</a>
+        <a href="https://exemple.com/image24.jpg" class="day" data-day="24">Image 24</a>
+    </div>
+
+    <script>
+        // Récupère le jour actuel
+        const today = new Date().getDate();
+
+        // Sélectionne tous les éléments "day"
+        const days = document.querySelectorAll('.day');
+
+        // Pour chaque jour
+        days.forEach(day => {
+            const dayNumber = parseInt(day.getAttribute('data-day'));
+
+            // Si le jour est dans le futur, le bloquer
+            if (dayNumber > today) {
+                day.classList.add('locked');
+                day.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const message = document.getElementById('message');
+                    message.textContent = "Trop tôt !";
+                    message.style.display = "block";
+                    setTimeout(() => {
+                        message.style.display = "none";
+                    }, 2000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
